@@ -78,7 +78,6 @@ https://stackoverflow.com/questions/14836958/updating-packages-in-emacs
 
 更新 melpa 软件源：`M-x package-refresh-contents`
 
-
 # tips
 
 emacs | theme
@@ -109,12 +108,23 @@ emacs | theme
 
 # reference
 
+https://github.com/emacs-tw/awesome-emacs#starter-kit
+
+https://github.com/caisah/emacs.dz
+
 https://github.com/purcell/emacs.d/blob/master/lisp/init-editing-utils.el
 
-使用 `use-package` ：https://github.com/codesuki/.emacs.d/blob/master/init.el
+使用 `use-package` 配置：https://github.com/codesuki/.emacs.d/blob/master/init.el
 
 # fork
+
+https://help.github.com/articles/syncing-a-fork/
+
+    git fetch upstream
+    git checkout master
+    git merge upstream/master
 
 [Fork 的分支从源分支更新的方法 2016-10-28](https://github.com/BearRan/CRAnimation/wiki/Fork的分支从源分支更新的方法)
 
 [同步一个 fork 2015-04-12](https://gaohaoyang.github.io/2015/04/12/Syncing-a-fork/)
+
