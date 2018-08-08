@@ -216,8 +216,11 @@
   "Major mode for editing GitHub Flavored Markdown files" t)
 (add-to-list 'auto-mode-alist '("README\\.md\\'" . gfm-mode))
 
+;; https://github.com/purcell/emacs.d/blob/master/lisp/init-elpa.el#L35
+;; (defun require-package (package &optional min-version no-refresh)...)
 (require-package 'ng2-mode)
-(setq typescript-indent-level 2
+(setq css-indent-offset 2
+      typescript-indent-level 2
       typescript-expr-indent-offset 2)
 
 ;; terminal
