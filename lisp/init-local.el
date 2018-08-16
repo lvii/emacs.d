@@ -223,6 +223,15 @@
       typescript-indent-level 2
       typescript-expr-indent-offset 2)
 
+;; https://github.com/proofit404/anaconda-mode
+(setq python-shell-interpreter "/usr/bin/python3")
+
+;; https://github.com/purcell/emacs.d/commit/1e089c5df98e762bbb83a2b0353654ed6a2db34c
+(when (maybe-require-package 'indent-guide)
+  (add-hook 'prog-mode-hook 'indent-guide-mode)
+  (after-load 'indent-guide
+    (diminish 'indent-guide-mode)))
+
 ;; terminal
 
 ;; (load-theme 'wombat t)
