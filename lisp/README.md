@@ -1,4 +1,10 @@
 
+# custom size
+
+    # du -sh ~/.emacs.d/elpa*
+    12K     /root/.emacs.d/elpa
+    24M     /root/.emacs.d/elpa-26.1
+
 # upstream
 
     $ git remote add upstream https://github.com/purcell/emacs.d.git

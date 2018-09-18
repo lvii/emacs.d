@@ -240,10 +240,10 @@
 
 ;; ;; undefine emacs background under terminal for transparent
 ;; ;; http://stackoverflow.com/questions/19054228/emacs-disable-theme-background-color-in-terminal
-;; (defun on-after-init ()
-;;   (unless (display-graphic-p (selected-frame))
-;;     (set-face-background 'default "unspecified-bg" (selected-frame))))
-;; (add-hook 'window-setup-hook 'on-after-init)
+(defun on-after-init ()
+  (unless (display-graphic-p (selected-frame))
+    (set-face-background 'default "unspecified-bg" (selected-frame))))
+(add-hook 'window-setup-hook 'on-after-init)
 
 ;; GUI theme font ...
 
