@@ -221,6 +221,13 @@
                                 (interactive)
                                 (other-window -1)))
 
+;; https://github.com/purcell/page-break-lines
+;; (global-page-break-lines-mode)
+(after-load 'page-break-lines
+  (push 'python-mode page-break-lines-modes)
+  (push 'ng2-ts-mode page-break-lines-modes)
+  (push 'typescript-mode page-break-lines-modes))
+
 
 ;; package config
 
