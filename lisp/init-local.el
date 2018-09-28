@@ -48,8 +48,8 @@
 
 ;; http://www.emacswiki.org/emacs/WinnerMode
 ;; restore windows layout : C-c ←
-(when (fboundp 'winner-mode)
-  (winner-mode 1))
+;; (when (fboundp 'winner-mode)
+;;   (winner-mode 1))
 
 ;; coding
 
@@ -125,6 +125,7 @@
   (comment-or-uncomment-region (line-beginning-position) (line-end-position)))
 
 (global-set-key "\C-c;" 'comment-toggle-current-line)
+
 
 ;; hotkey
 
@@ -204,6 +205,22 @@
 ;; TODO: markdown preview still use prettify-symbols
 (prettify-symbols-mode 0)
 (global-prettify-symbols-mode 0)
+
+;; https://github.com/dimitri/switch-window
+;; (setq switch-window-threshold 2)
+;; (setq switch-window-minibuffer-shortcut ?z)
+(global-set-key (kbd "C-x q") 'switch-window)
+(global-set-key (kbd "C-x o") 'other-window)
+
+;; http://emacsredux.com/blog/2013/03/30/go-back-to-previous-window/
+;; C-- C-x o
+;; M-- C-x o
+;; C-u -1 C-x o
+;; M-  -1 C-x o
+(global-set-key (kbd "C-x O") (lambda ()
+                                (interactive)
+                                (other-window -1)))
+
 
 ;; package config
 
