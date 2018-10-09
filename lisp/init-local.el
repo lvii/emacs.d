@@ -256,6 +256,10 @@
   (after-load 'indent-guide
     (diminish 'indent-guide-mode)))
 
+(require-package 'figlet)
+(setq  figlet-default-font "smslant")
+
+
 ;; terminal
 
 ;; (load-theme 'wombat t)
