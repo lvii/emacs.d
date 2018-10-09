@@ -250,11 +250,20 @@
 ;; https://github.com/proofit404/anaconda-mode
 (setq python-shell-interpreter "/usr/bin/python3")
 
-;; https://github.com/purcell/emacs.d/commit/1e089c5df98e762bbb83a2b0353654ed6a2db34c
-(when (maybe-require-package 'indent-guide)
-  (add-hook 'prog-mode-hook 'indent-guide-mode)
-  (after-load 'indent-guide
-    (diminish 'indent-guide-mode)))
+;; ;; https://github.com/purcell/emacs.d/commit/1e089c5df98e762bbb83a2b0353654ed6a2db34c
+;; (when (maybe-require-package 'indent-guide)
+;;   (add-hook 'prog-mode-hook 'indent-guide-mode)
+;;   (after-load 'indent-guide
+;;     (diminish 'indent-guide-mode)))
+;; (setq indent-guide-recursive t)
+
+(when (maybe-require-package 'highlight-indentation)
+  (add-hook 'prog-mode-hook  'highlight-indentation-current-column-mode)
+  (add-hook 'python-mode-hook 'highlight-indentation-mode)
+  (add-hook 'ng2-mode-hook   (setq highlight-indentation-offset '2))
+  (add-hook 'html-mode-hook  'highlight-indentation-current-column-mode)
+  (after-load 'highlight-indentation
+    (diminish 'highlight-indentation-mode)))
 
 (require-package 'figlet)
 (setq  figlet-default-font "smslant")
