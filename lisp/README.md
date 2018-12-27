@@ -97,6 +97,16 @@ emacs | theme
 
 使用 Secondary Selection 需要 `Shift` + 鼠标中键
 
+**新建文件**：`C-x C-f (counsel-find-file)` 新建文件名如果匹配已有文件时使用 `C-M-j` 退出匹配
+
+https://oremacs.com/swiper/#key-bindings-for-single-selection-action-then-exit-minibuffer
+
+> `C-M-j` (`ivy-immediate-done`)
+>
+> Exits with _the current input_ instead of _the current candidate_ (like other commands).
+>
+> This is useful e.g. **when you call `find-file` to create a new file, but the desired name matches an existing file**. In that case, using `C-j` would select that existing file, which isn't what you want - use this command instead.
+
 # trick
 
 同步新装的 `epla` 软件包和 `custom.el` 配置：

@@ -209,7 +209,7 @@
 ;; https://github.com/dimitri/switch-window
 ;; (setq switch-window-threshold 2)
 ;; (setq switch-window-minibuffer-shortcut ?z)
-(global-set-key (kbd "C-x q") 'switch-window)
+(global-set-key (kbd "C-x q") 'switch-window) ;; tmux like, default: C-x q --> kbd-macro-query
 (global-set-key (kbd "C-x o") 'other-window)
 
 ;; http://emacsredux.com/blog/2013/03/30/go-back-to-previous-window/
@@ -266,7 +266,7 @@
     (diminish 'highlight-indentation-mode)))
 
 (require-package 'figlet)
-(setq  figlet-default-font "smslant")
+(setq figlet-default-font "smslant")
 
 
 ;; terminal
@@ -277,10 +277,10 @@
 
 ;; ;; undefine emacs background under terminal for transparent
 ;; ;; http://stackoverflow.com/questions/19054228/emacs-disable-theme-background-color-in-terminal
-(defun on-after-init ()
-  (unless (display-graphic-p (selected-frame))
-    (set-face-background 'default "unspecified-bg" (selected-frame))))
-(add-hook 'window-setup-hook 'on-after-init)
+;; (defun on-after-init ()
+;;   (unless (display-graphic-p (selected-frame))
+;;     (set-face-background 'default "unspecified-bg" (selected-frame))))
+;; (add-hook 'window-setup-hook 'on-after-init)
 
 ;; GUI theme font ...
 
