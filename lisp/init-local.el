@@ -199,7 +199,8 @@
 ;;                   (face-attribute 'default :family))
 
 ;; http://emacs.stackexchange.com/questions/10837/how-to-make-company-mode-be-case-sensitive-on-plain-text
-(setq company-dabbrev-downcase nil)
+;; (setq company-dabbrev-downcase nil)
+(setq company-dabbrev-downcase 'case-replace)
 (desktop-save-mode 0)
 
 ;; TODO: markdown preview still use prettify-symbols
@@ -222,11 +223,12 @@
                                 (other-window -1)))
 
 ;; https://github.com/purcell/page-break-lines
-;; (global-page-break-lines-mode)
 (after-load 'page-break-lines
+  (push 'sh-mode page-break-lines-modes)
   (push 'python-mode page-break-lines-modes)
   (push 'ng2-ts-mode page-break-lines-modes)
-  (push 'typescript-mode page-break-lines-modes))
+  (push 'typescript-mode page-break-lines-modes)
+  )
 
 
 ;; package config
