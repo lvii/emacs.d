@@ -270,6 +270,9 @@
 (require-package 'figlet)
 (setq figlet-default-font "smslant")
 
+(require-package 'keychain-environment)
+(keychain-refresh-environment)
+
 
 ;; terminal
 
