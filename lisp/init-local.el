@@ -12,8 +12,7 @@
 ;; minor mode
 
 (blink-cursor-mode 0)
-;; (column-number-mode 1)
-;; (line-number-mode 1)
+(column-number-mode 1)
 (menu-bar-mode 0)
 (delete-selection-mode t)                                           ;; overwrite selected text
 (global-hl-line-mode 1)
@@ -34,15 +33,26 @@
 (setq
  inhibit-startup-message t
  initial-scratch-message nil
+ ediff-window-setup-function 'ediff-setup-windows-plain
  ediff-split-window-function 'split-window-horizontally ;; '|' key swap horizontal -> vertical
  tramp-default-method "ssh" ;; C-h v tramp-methods M-x customize-variable RET tramp-verbose RET
  mouse-yank-at-point t
  calendar-week-start-day 1
- require-final-newline nil
- mode-require-final-newline nil
+ ;; require-final-newline nil
+ ;; mode-require-final-newline nil
  sentence-end-double-space nil
  sentence-end "\\([。！？]\\|……\\|[.?!][]\"')}]*\\($\\|[ \t]\\)\\)[ \t\n]*"
  )
+
+;; https://www.gnu.org/software/emacs/manual/html_node/tramp/Auto_002dsave-File-Lock-and-Backup.html
+(add-to-list 'backup-directory-alist
+             (cons tramp-file-name-regexp nil))
+
+(customize-set-variable
+ 'tramp-ssh-controlmaster-options
+ (concat
+   "-o ControlPath=/tmp/ssh-mux-%%r@%%h:%%p "
+   "-o ControlMaster=auto -o ControlPersist=yes"))
 
 (defalias 'yes-or-no-p 'y-or-n-p)
 
@@ -67,6 +77,10 @@
 (setq show-paren-delay 0)
 (setq show-paren-style 'parentheses)
 
+;; (line-number-mode 1)
+;; (setq linum-format " %d ")
+;; (setq linum-format "%4d \u2502 ")
+
 ;; history
 
 ;; savehist-mode
@@ -89,7 +103,7 @@
 ;; 2. linux 环境变量 ENV ：export LANG=en_US.UTF-8
 ;; 3. emacs 配置编码解析顺序
 (setq locale-coding-system 'utf-8)
-(set-coding-system-priority 'utf-8 'gbk 'gb2312)
+
 (set-default-coding-systems 'utf-8)
 (set-buffer-file-coding-system 'utf-8)
 (set-keyboard-coding-system 'utf-8)
@@ -155,25 +169,20 @@
 ;; ;; https://github.com/mjwall/dotfiles/blob/master/dotemacs.d/init.el
 ;; (global-set-key (kbd "C-x C-b") 'bs-show) ;; bs instead of buffer-menu
 
+;; ;; https://github.com/xiaohanyu/oh-my-emacs/blob/master/core/ome-keybindings.org
+;; ;; hippie expand is dabbrev expand on steroids
+;; (setq hippie-expand-try-functions-list
+;;       '(try-expand-dabbrev
+;;         try-expand-dabbrev-all-buffers
+;;         try-expand-dabbrev-from-kill
+;;         try-complete-file-name-partially
+;;         try-complete-file-name))
+;; (global-set-key (kbd "M-/") 'hippie-expand)
+
 ;; hook
 
 (add-hook 'text-mode-hook (lambda () (setq tab-width 4)))
-
-;; (defun my-c-mode-config ()
-;;   (whitespace-mode 1)
-;;   (setq indent-tabs-mode t
-;;   tab-width        4
-;;   c-basic-offset   4))
-;; (add-hook 'c-mode-hook 'my-c-mode-config)
-
-;; (eval-after-load "cc-mode"
-;;   '(define-key c-mode-map (kbd "TAB") 'self-insert-command))
-
-;; (defun custom-js-mode ()
-;;   "js-mode-hook"
-;;   (setq js-indent-level 2))
-
-;; (add-hook 'js-mode-hook 'custom-js-mode)
+(add-hook 'conf-mode-hook (lambda () (setq tab-width 4)))
 
 ;; ;; http://www.emacswiki.org/emacs/EmacsLispMode
 ;; (add-hook 'emacs-lisp-mode-hook
@@ -242,6 +251,28 @@
   "Major mode for editing GitHub Flavored Markdown files" t)
 (add-to-list 'auto-mode-alist '("README\\.md\\'" . gfm-mode))
 
+;; https://github.com/proofit404/anaconda-mode
+(cond
+ ;; ((string-equal system-type "windows-nt")
+ ;;  )
+ ((string-equal system-type "darwin")
+  (setq python-shell-interpreter "/usr/local/bin/python3")
+  (setq mac-option-modifier 'meta)
+  (setq mac-command-modifier 'super)
+  )
+ (t ;; GNU/Linux or BSD
+  (setq python-shell-interpreter "/usr/bin/python3")
+  )
+ )
+
+;; (setq sh-indentation 4
+;;       sh-basic-offset 4)
+;;       web-mode-markup-indent-offset 2
+;;       web-mode-code-indent-offset 2
+;;       web-mode-css-indent-offset 2
+;;       web-mode-sql-indent-offset 2
+;;       typescript-indent-level 2)
+
 ;; https://github.com/purcell/emacs.d/blob/master/lisp/init-elpa.el#L35
 ;; (defun require-package (package &optional min-version no-refresh)...)
 (require-package 'ng2-mode)
@@ -249,23 +280,21 @@
       typescript-indent-level 2
       typescript-expr-indent-offset 2)
 
-;; https://github.com/proofit404/anaconda-mode
-(setq python-shell-interpreter "/usr/bin/python3")
-
-;; ;; https://github.com/purcell/emacs.d/commit/1e089c5df98e762bbb83a2b0353654ed6a2db34c
-;; (when (maybe-require-package 'indent-guide)
-;;   (add-hook 'prog-mode-hook 'indent-guide-mode)
-;;   (after-load 'indent-guide
-;;     (diminish 'indent-guide-mode)))
-;; (setq indent-guide-recursive t)
-
+;; https://github.com/antonj/Highlight-Indentation-for-Emacs
 (when (maybe-require-package 'highlight-indentation)
-  (add-hook 'prog-mode-hook  'highlight-indentation-current-column-mode)
-  (add-hook 'python-mode-hook 'highlight-indentation-mode)
-  (add-hook 'ng2-mode-hook   (setq highlight-indentation-offset '2))
-  (add-hook 'html-mode-hook  'highlight-indentation-current-column-mode)
+  (setq highlight-indentation-blank-lines t)
+  (add-hook 'prog-mode-hook  'highlight-indentation-mode)
+  (dolist (hook '(typescript-mode-hook ng2-mode-hook))
+    (add-hook hook
+              (lambda ()
+                (highlight-indentation-set-offset '2)
+                (highlight-indentation-mode))))
   (after-load 'highlight-indentation
     (diminish 'highlight-indentation-mode)))
+
+;; (add-hook 'typescript-mode-hook
+;;           (lambda ()
+;;             (highlight-indentation-set-offset '2)))
 
 (require-package 'figlet)
 (setq figlet-default-font "smslant")
@@ -276,7 +305,7 @@
 
 ;; terminal
 
-;; (load-theme 'wombat t)
+(load-theme 'wombat t)
 (set-face-underline 'highlight nil)                                 ;; M-x describe-face <RET> highlight
 (set-face-attribute hl-line-face nil :underline nil)                ;; M-x describe-face <RET> hl-line
 
@@ -309,7 +338,7 @@
     ;; (window-height) (window-width) ;; 查询 window size
 
     ;; 窗口 "位置 position" (top left) "大小 size" (height width)
-    (setq default-frame-alist '((top . 0) (left . 160) (height . 39) (width . 110)))
+    (setq default-frame-alist '((left . 200) (top . 150) (width . 160) (height . 54)))
 
     ;; | English Font             | Size | 中文字体     | 中文字号 |
     ;; |--------------------------+------+--------------+----------|
@@ -326,6 +355,8 @@
      ((string-equal system-type "darwin")
       (add-to-list 'default-frame-alist '(font . "Menlo-14"))
       (set-fontset-font "fontset-default" 'unicode "PingFang SC-16")
+      (set-face-font 'fixed-pitch "Menlo-14")           ;; M-x describe-face fixed-pitch
+      ;; (copy-face 'fixed-pitch 'default)              ;; TODO: font-size NOT 14 was 12
       )
      (t ;; GNU/Linux or BSD
       ;; (string-equal system-type "gnu/linux")

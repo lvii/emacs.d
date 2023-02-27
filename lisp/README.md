@@ -84,11 +84,21 @@ https://stackoverflow.com/questions/14836958/updating-packages-in-emacs
 
 更新 melpa 软件源：`M-x package-refresh-contents`
 
-# tips
+# customize
+
+## fill-column-indicator-mode
+
+[disabeling (global-display-fill-column-indicator-mode -1) does not work #812](https://github.com/purcell/emacs.d/issues/812)
+
+<https://emacs.stackexchange.com/questions/147/how-can-i-get-a-ruler-at-column-80>
+
+<https://github.com/purcell/emacs.d/blob/master/lisp/init-editing-utils.el>
+
+## theme
 
 emacs | theme
 ----- | -----
-`emacs` (X11) | `sanityinc-tomorrow-night`
+`emacs` X11 | `sanityinc-tomorrow-night`
 `emacs-nox` | `sanityinc-tomorrow-bright`
 
 `~/.emacs.d/custom.el` 中配置 `sanityinc-tomorrow-bright` 可以覆盖 `wombat` 主题补全相关设置
@@ -106,6 +116,28 @@ https://oremacs.com/swiper/#key-bindings-for-single-selection-action-then-exit-m
 > Exits with _the current input_ instead of _the current candidate_ (like other commands).
 >
 > This is useful e.g. **when you call `find-file` to create a new file, but the desired name matches an existing file**. In that case, using `C-j` would select that existing file, which isn't what you want - use this command instead.
+
+
+## custom.el
+
+``` emacs-lisp
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(custom-enabled-themes '(wombat sanityinc-tomorrow-bright))
+ '(package-selected-packages
+   '(keychain-environment figlet highlight-indentation ng2-mode envrc uptimes shfmt dotenv-mode osx-location htmlize gnuplot sudo-edit origami regex-tool info-colors nginx-mode docker-compose-mode dockerfile-mode docker yaml-mode sqlformat reformatter toml-mode pip-requirements restclient httprepl css-eldoc skewer-less sass-mode rainbow-mode tagedit org-pomodoro writeroom-mode org-cliplink grab-mac-link add-node-modules-path skewer-mode js-comint coffee-mode prettier-js typescript-mode js2-mode json-mode csv-mode markdown-mode alert ibuffer-projectile git-commit magit-todos magit git-link git-timemachine git-modes git-blamed whitespace-cleanup-mode which-key highlight-escape-sequences whole-line-or-region move-dup page-break-lines multiple-cursors avy browse-kill-ring symbol-overlay rainbow-delimiters mode-line-bell vlf list-unicode-display unfill mmm-mode session windswap switch-window corfu orderless marginalia consult-flycheck embark-consult projectile consult embark vertico consult-eglot eglot flymake-flycheck flymake ibuffer-vc wgrep anzu diff-hl diredfl disable-mouse default-text-scale ns-auto-titlebar dimmer color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized command-log-mode scratch diminish exec-path-from-shell gnu-elpa-keyring-update fullframe seq))
+ '(session-use-package t nil (session)))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
+```
+
 
 # trick
 
