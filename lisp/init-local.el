@@ -302,6 +302,13 @@
 (require-package 'keychain-environment)
 (keychain-refresh-environment)
 
+;; https://emacs.stackexchange.com/questions/14438/remove-hooks-for-specific-modes
+(remove-hook 'prog-mode-hook 'display-fill-column-indicator-mode)
+
+;; (require-package 'flymake-ruff)
+;; (setq flymake-ruff-program '${HOME}/VENV311/bin/ruff)
+;; (add-hook 'python-mode-hook #'flymake-ruff-load)
+
 
 ;; terminal
 
