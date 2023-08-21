@@ -9,8 +9,8 @@
   (require-package 'elein)
 
   (with-eval-after-load 'clojure-mode
-    (add-hook 'clojure-mode-hook 'sanityinc/lisp-setup)
-    (add-hook 'clojure-mode-hook 'subword-mode)))
+    (dolist (m '(clojure-mode-hook clojure-ts-mode-hook))
+      (add-hook m 'sanityinc/lisp-setup))))
 
 
 (provide 'init-clojure)
