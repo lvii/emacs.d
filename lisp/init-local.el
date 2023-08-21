@@ -273,18 +273,19 @@
 ;;       web-mode-sql-indent-offset 2
 ;;       typescript-indent-level 2)
 
-;; https://github.com/purcell/emacs.d/blob/master/lisp/init-elpa.el#L35
-;; (defun require-package (package &optional min-version no-refresh)...)
-(require-package 'ng2-mode)
-(setq css-indent-offset 2
-      typescript-indent-level 2
-      typescript-expr-indent-offset 2)
+;; ;; https://github.com/purcell/emacs.d/blob/master/lisp/init-elpa.el#L35
+;; ;; (defun require-package (package &optional min-version no-refresh)...)
+;; (require-package 'ng2-mode)
+;; (setq css-indent-offset 2
+;;       lisp-indent-offset 2
+;;       typescript-indent-level 2
+;;       typescript-expr-indent-offset 2)
 
 ;; https://github.com/antonj/Highlight-Indentation-for-Emacs
 (when (maybe-require-package 'highlight-indentation)
   (setq highlight-indentation-blank-lines t)
-  (add-hook 'prog-mode-hook  'highlight-indentation-mode)
-  (dolist (hook '(typescript-mode-hook ng2-mode-hook))
+  (add-hook 'prog-mode-hook 'highlight-indentation-mode)
+  (dolist (hook '(typescript-mode-hook ng2-mode-hook emacs-lisp-mode-hook))
     (add-hook hook
               (lambda ()
                 (highlight-indentation-set-offset '2)
@@ -292,9 +293,17 @@
   (after-load 'highlight-indentation
     (diminish 'highlight-indentation-mode)))
 
+;; (add-hook 'prog-mode-hook  'highlight-indentation-mode)
+
 ;; (add-hook 'typescript-mode-hook
 ;;           (lambda ()
 ;;             (highlight-indentation-set-offset '2)))
+
+;; (dolist (hook '(typescript-mode-hook ng2-mode-hook emacs-lisp-mode-hook))
+;;   (add-hook hook
+;;             (lambda ()
+;;               (highlight-indentation-set-offset '2)
+;;               (highlight-indentation-mode))))
 
 (require-package 'figlet)
 (setq figlet-default-font "smslant")
@@ -305,9 +314,45 @@
 ;; https://emacs.stackexchange.com/questions/14438/remove-hooks-for-specific-modes
 (remove-hook 'prog-mode-hook 'display-fill-column-indicator-mode)
 
-;; (require-package 'flymake-ruff)
-;; (setq flymake-ruff-program '${HOME}/VENV311/bin/ruff)
-;; (add-hook 'python-mode-hook #'flymake-ruff-load)
+(require-package 'flymake-ruff)
+;; (setq flymake-ruff-program "${HOME}/VENV311/bin/ruff")
+(setq flymake-ruff-program "~/VENV311/bin/ruff")
+;; (setq flymake-ruff-program "/Users/bytedance/VENV311/bin/ruff")
+(add-hook 'python-mode-hook #'flymake-ruff-load)
+
+;; (require-package 'flycheck)
+;; ;; From https://github.com/flycheck/flycheck/issues/1974#issuecomment-1343495202
+;; ;; https://github.com/Wilfred/flycheck-pyflakes/blob/master/flycheck-pyflakes.el
+;; (flycheck-define-checker python-ruff
+;;   "A Python syntax and style checker using the ruff utility.
+;;   To override the path to the ruff executable, set `flycheck-python-ruff-executable'.
+;;   See URL `http://pypi.python.org/pypi/ruff'."
+;;   :command ("ruff"
+;;             "--format=text"
+;;             (eval (when buffer-file-name
+;;                     (concat "--stdin-filename=" buffer-file-name)))
+;;             "-")
+;;   :standard-input t
+;;   :error-filter (lambda (errors)
+;;                   (let ((errors (flycheck-sanitize-errors errors)))
+;;                     (seq-map #'flycheck-flake8-fix-error-level errors)))
+;;   :error-patterns
+;;   ((warning line-start
+;;             (file-name) ":" line ":" (optional column ":") " "
+;;             (id (one-or-more (any alpha)) (one-or-more digit)) " "
+;;             (message (one-or-more not-newline))
+;;             line-end))
+;;   :modes python-mode)
+
+;; ;; Use something adapted to your config to add `python-ruff' to `flycheck-checkers'
+;; ;; This is an MVP example:
+;; (setq python-mode-hook
+;;       (list (defun my-python-hook ()
+;;               (unless (bound-and-true-p org-src-mode)
+;;                 (when (buffer-file-name)
+;;                   (setq flycheck-python-ruff-executable "${HOME}/VENV311/bin/ruff")
+;;                   (setq-local flycheck-checkers '(python-ruff))
+;;                   (flycheck-mode))))))
 
 
 ;; terminal
@@ -364,6 +409,7 @@
       (set-fontset-font "fontset-default" 'unicode "PingFang SC-16")
       (set-face-font 'fixed-pitch "Menlo-14")           ;; M-x describe-face fixed-pitch
       ;; (copy-face 'fixed-pitch 'default)              ;; TODO: font-size NOT 14 was 12
+      (add-to-list 'exec-path "/usr/local/bin")
       )
      (t ;; GNU/Linux or BSD
       ;; (string-equal system-type "gnu/linux")
