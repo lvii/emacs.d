@@ -232,7 +232,7 @@
                                 (other-window -1)))
 
 ;; https://github.com/purcell/page-break-lines
-(after-load 'page-break-lines
+(with-eval-after-load 'page-break-lines
   (push 'sh-mode page-break-lines-modes)
   (push 'python-mode page-break-lines-modes)
   (push 'ng2-ts-mode page-break-lines-modes)
@@ -290,7 +290,7 @@
               (lambda ()
                 (highlight-indentation-set-offset '2)
                 (highlight-indentation-mode))))
-  (after-load 'highlight-indentation
+  (with-eval-after-load 'highlight-indentation
     (diminish 'highlight-indentation-mode)))
 
 ;; (add-hook 'prog-mode-hook  'highlight-indentation-mode)
@@ -314,11 +314,11 @@
 ;; https://emacs.stackexchange.com/questions/14438/remove-hooks-for-specific-modes
 (remove-hook 'prog-mode-hook 'display-fill-column-indicator-mode)
 
-(require-package 'flymake-ruff)
+;; (require-package 'flymake-ruff)
 ;; (setq flymake-ruff-program "${HOME}/VENV311/bin/ruff")
-(setq flymake-ruff-program "~/VENV311/bin/ruff")
+;; (setq flymake-ruff-program "~/VENV311/bin/ruff")
 ;; (setq flymake-ruff-program "/Users/bytedance/VENV311/bin/ruff")
-(add-hook 'python-mode-hook #'flymake-ruff-load)
+;; (add-hook 'python-mode-hook #'flymake-ruff-load)
 
 ;; (require-package 'flycheck)
 ;; ;; From https://github.com/flycheck/flycheck/issues/1974#issuecomment-1343495202
