@@ -126,11 +126,11 @@
 (maybe-require-package 'just-mode)
 (maybe-require-package 'justl)
 
-(require 'init-paredit)
-(require 'init-lisp)
-(require 'init-sly)
-(require 'init-clojure)
-(require 'init-clojure-cider)
+;; (require 'init-paredit)
+;; (require 'init-lisp)
+;; (require 'init-sly)
+;; (require 'init-clojure)
+;; (require 'init-clojure-cider)
 
 (when *spell-check-support-enabled*
   (require 'init-spelling))
