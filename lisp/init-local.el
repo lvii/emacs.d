@@ -293,6 +293,33 @@
   (with-eval-after-load 'highlight-indentation
     (diminish 'highlight-indentation-mode)))
 
+
+;; ;; https://github.com/tarsius/moody/tree/main
+;; (when (maybe-require-package 'moody)
+
+;;   (setq x-underline-at-descent-line t)
+
+;;   ;; https://github.com/xenodium/dotsies/blob/main/emacs/features/fe-ui.el
+
+;;   ;; ;; Hardcode region theme color.
+;;   ;; (set-face-attribute 'region nil :background "#3f464c" :foreground "#eeeeec" :underline nil)
+;;   ;; (set-face-attribute 'mode-line nil :background "#191919" :box nil)
+
+;;   ;; ;; Styling moody https://github.com/tarsius/moody
+;;   ;; (let ((line (face-attribute 'mode-line :underline)))
+;;   ;;   (set-face-attribute 'mode-line nil :overline   line)
+;;   ;;   (set-face-attribute 'mode-line-inactive nil :overline   line)
+;;   ;;   (set-face-attribute 'mode-line-inactive nil :underline  line)
+;;   ;;   (set-face-attribute 'mode-line nil :box nil)
+;;   ;;   (set-face-attribute 'mode-line-inactive nil :box nil)
+;;   ;;   (set-face-attribute 'mode-line-inactive nil :background "#212121" :foreground "#5B6268"))
+
+;;   (moody-replace-mode-line-front-space)
+;;   (moody-replace-mode-line-buffer-identification)
+;;   (moody-replace-vc-mode)
+;; )
+
+
 ;; (add-hook 'prog-mode-hook  'highlight-indentation-mode)
 
 ;; (add-hook 'typescript-mode-hook
