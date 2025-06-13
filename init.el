@@ -98,7 +98,7 @@
 (require 'init-markdown)
 (require 'init-csv)
 ;; (require 'init-erlang)
-(require 'init-javascript)
+;; (require 'init-javascript)
 ;; (require 'init-php)
 (require 'init-org)
 (require 'init-nxml)
@@ -119,16 +119,16 @@
 ;; (require 'init-rust)
 ;; (require 'init-toml)
 (require 'init-yaml)
-(require 'init-docker)
+;; (require 'init-docker)
 ;; (require 'init-terraform)
-;;(require 'init-nix)
+;; (require 'init-nix)
 (maybe-require-package 'nginx-mode)
-(maybe-require-package 'just-mode)
-(when (maybe-require-package 'just-ts-mode)
-  ;; Undo overly-optimistic autoloading, so that things still work in
-  ;; Emacs 29 without treesitter
-  (sanityinc/remove-auto-mode  'just-ts-mode))
-(maybe-require-package 'justl)
+;; (maybe-require-package 'just-mode)
+;; (when (maybe-require-package 'just-ts-mode)
+;;   ;; Undo overly-optimistic autoloading, so that things still work in
+;;   ;; Emacs 29 without treesitter
+;;   (sanityinc/remove-auto-mode  'just-ts-mode))
+;; (maybe-require-package 'justl)
 
 ;; (require 'init-paredit)
 ;; (require 'init-lisp)
@@ -153,7 +153,7 @@
 ;; Extra packages which don't require any configuration
 
 (require-package 'sudo-edit)
-(require-package 'gnuplot)
+;; (require-package 'gnuplot)
 (require-package 'htmlize)
 (when *is-a-mac*
   (require-package 'osx-location))
@@ -164,8 +164,8 @@
   (setq-default uptimes-keep-count 200)
   (add-hook 'after-init-hook (lambda () (require 'uptimes))))
 
-(when (fboundp 'global-eldoc-mode)
-  (add-hook 'after-init-hook 'global-eldoc-mode))
+;; (when (fboundp 'global-eldoc-mode)
+;;   (add-hook 'after-init-hook 'global-eldoc-mode))
 
 (require 'init-direnv)
 
