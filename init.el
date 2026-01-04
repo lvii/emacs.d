@@ -116,8 +116,8 @@
 ;; (require 'init-ocaml)
 ;; (require 'init-j)
 ;; (require 'init-nim)
-;; (require 'init-rust)
-;; (require 'init-toml)
+(require 'init-rust)
+(require 'init-toml)
 (require 'init-yaml)
 ;; (require 'init-docker)
 ;; (require 'init-terraform)
@@ -154,6 +154,8 @@
 
 (require-package 'sudo-edit)
 ;; (require-package 'gnuplot)
+;; (maybe-require-package 'gnuplot)
+
 (require-package 'htmlize)
 (when *is-a-mac*
   (require-package 'osx-location))
