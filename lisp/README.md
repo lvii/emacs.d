@@ -38,7 +38,7 @@
     Already on 'master'
     Your branch is up to date with 'origin/master'.
 
-    $ git merge upstream/master
+    $ git merge upstream/main                                   # <-- 原仓库已从 master 切换至 main 分支
     Merge made by the 'recursive' strategy.
      .travis.yml          |  1 +
      lisp/init-compile.el |  4 ++--
