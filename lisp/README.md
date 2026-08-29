@@ -117,6 +117,15 @@ https://oremacs.com/swiper/#key-bindings-for-single-selection-action-then-exit-m
 >
 > This is useful e.g. **when you call `find-file` to create a new file, but the desired name matches an existing file**. In that case, using `C-j` would select that existing file, which isn't what you want - use this command instead.
 
+滚动时高亮光标所在行插件：
+
+- <https://github.com/protesilaos/pulsar>
+- <https://github.com/Malabarba/beacon>
+
+``` emacs-lisp
+(defvar pulsar-tty-color "red"
+  "Named color used in non-graphical frames.")
+```
 
 ## custom.el
 

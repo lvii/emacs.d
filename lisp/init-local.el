@@ -332,8 +332,8 @@
 ;;               (highlight-indentation-set-offset '2)
 ;;               (highlight-indentation-mode))))
 
-(require-package 'figlet)
-(setq figlet-default-font "smslant")
+;; (require-package 'figlet)
+;; (setq figlet-default-font "smslant")
 
 (require-package 'keychain-environment)
 (keychain-refresh-environment)
@@ -387,6 +387,9 @@
 (load-theme 'wombat t)
 (set-face-underline 'highlight nil)                                 ;; M-x describe-face <RET> highlight
 (set-face-attribute hl-line-face nil :underline nil)                ;; M-x describe-face <RET> hl-line
+
+;; indianred rosybrown
+(setq pulsar-tty-color "darkslateblue")                             ;; M-X list-colors-display
 
 ;; ;; undefine emacs background under terminal for transparent
 ;; ;; http://stackoverflow.com/questions/19054228/emacs-disable-theme-background-color-in-terminal
